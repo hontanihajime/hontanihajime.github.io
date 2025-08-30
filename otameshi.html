@@ -13,6 +13,9 @@
   <style>
     body {
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
     header {
       display: flex;
@@ -88,18 +91,27 @@
       text-decoration: underline;
     }
 
-    /* コンテンツ部分 */
-    .content {
-      padding: 0;
-      margin: 0;
+    /* コンテンツレイアウト */
+    .main-content {
+      display: flex;
+      flex: 1;
     }
-    .content img.top-img {
-      display: block;
-      margin: 0;
+    .menu {
+      background: #f3e8ff; /* 薄紫色 */
       padding: 0;
-      width: auto;
-      max-width: 150px; /* hajimeserverより短めに設定 */
-      height: auto;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .menu img {
+      width: 100px;
+      display: block;
+    }
+    .content-area {
+      flex: 1;
+      background: #ffffff;
+      padding: 20px;
     }
   </style>
 </head>
@@ -131,8 +143,24 @@
     </div>
   </header>
 
-  <div class="content">
-    <img src="/file/top.png" alt="Top Image" class="top-img">
+  <div class="main-content">
+    <div class="menu">
+      <img src="/file/top.png" alt="Top">
+      <img src="/file/calendar.png" alt="Calendar">
+      <img src="/file/dentaku.png" alt="Dentaku">
+      <img src="/file/app.png" alt="App">
+      <img src="/file/news.png" alt="News">
+      <img src="/file/timer.png" alt="Timer">
+      <img src="/file/drive.png" alt="Drive">
+      <img src="/file/seiseki.png" alt="Seiseki">
+      <img src="/file/sutasapu.png" alt="Sutasapu">
+      <img src="/file/mail.png" alt="Mail">
+      <img src="/file/people.png" alt="People">
+      <img src="/file/sonota.png" alt="Sonota">
+    </div>
+    <div class="content-area">
+      <!-- ここにコンテンツを表示 -->
+    </div>
   </div>
 
   <script>
