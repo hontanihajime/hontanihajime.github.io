@@ -16,11 +16,11 @@
     }
     header {
       display: flex;
-      align-items: center;
+      align-items: center; /* 縦中央揃え */
       justify-content: flex-start;
       height: 60px;
       background: #ffffff;
-      padding: 0;
+      padding: 0 10px;
       border-bottom: 8px solid transparent;
       border-image: linear-gradient(to right, #6633CC, #C299FF) 1;
     }
@@ -30,18 +30,29 @@
       padding: 0;
       object-fit: contain;
     }
-    .site-name {
-      font-size: 1.2rem;
-      font-weight: bold;
+    .login-link {
+      font-size: 0.8rem;
+      margin-left: 12px;
+      position: relative;
+      top: 10px; /* さらに少し下に移動 */
+    }
+    .login-link a {
       color: #333;
-      margin-left: 10px;
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="/file/hajimeserver.png" alt="Logo">
-    <div class="site-name">はじめサーバー</div>
+    <div class="login-link">
+      <a href="https://github.com/hontanihajime/hontanihajime.github.io" target="_blank" rel="noopener noreferrer">
+        管理ページへログイン
+      </a>
+    </div>
   </header>
 </body>
 </html>
