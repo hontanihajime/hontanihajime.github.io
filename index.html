@@ -68,6 +68,13 @@
       color: inherit;
     }
 
+    /* 起床・就寝・登校・下校ボタン専用 */
+    .gradient-btn {
+      background: linear-gradient(to right, #6633CC, #C299FF);
+      color: #fff;
+      border: none;
+    }
+
     .login-link {
       font-size: 0.8rem;
       position: relative;
@@ -98,8 +105,10 @@
           ログアウト
         </a>
       </div>
-      <button class="action-btn" onclick="recordWake()">起床</button>
-      <button class="action-btn" onclick="recordSleep()">就寝</button>
+      <button class="action-btn gradient-btn" onclick="recordWake()">起床</button>
+      <button class="action-btn gradient-btn" onclick="recordSleep()">就寝</button>
+      <button class="action-btn gradient-btn" onclick="recordGoSchool()">登校</button>
+      <button class="action-btn gradient-btn" onclick="recordLeaveSchool()">下校</button>
     </div>
     <div class="login-link">
       <a href="https://github.com/hontanihajime/hontanihajime.github.io" target="_blank" rel="noopener noreferrer">
@@ -117,6 +126,14 @@
 
     function recordSleep() {
       fetch(GAS_URL + "?action=sleep");
+    }
+
+    function recordGoSchool() {
+      fetch(GAS_URL + "?action=goSchool");
+    }
+
+    function recordLeaveSchool() {
+      fetch(GAS_URL + "?action=leaveSchool");
     }
   </script>
 </body>
