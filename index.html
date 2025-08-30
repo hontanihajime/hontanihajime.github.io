@@ -28,8 +28,9 @@
       display: flex;
       align-items: center;
     }
-    header img {
-      height: 100%;
+    header img.logo {
+      max-height: 100%;
+      width: auto;
       margin: 0;
       padding: 0;
       object-fit: contain;
@@ -83,7 +84,7 @@
 <body>
   <header>
     <div class="left-section">
-      <img src="/file/hajimeserver.png" alt="Logo">
+      <img src="/file/hajimeserver.png" alt="Logo" class="logo">
       <div class="google-btn">
         <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
           <img src="/file/google.png" alt="Google Icon">
