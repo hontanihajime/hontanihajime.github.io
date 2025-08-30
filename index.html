@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>はじめサーバー</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header Test</title>
+  
+  <!-- favicon / iOS / PWA icons -->
+  <link rel="icon" type="image/jpeg" href="/file/logo.jpeg">
+  <link rel="apple-touch-icon" href="/file/logo.jpeg">
+  <link rel="shortcut icon" type="image/jpeg" href="/file/logo.jpeg">
+
+  <style>
+    body {
+      margin: 0;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      height: 60px; /* 必要なら調整 */
+      background: linear-gradient(to right, #6633CC, #C299FF);
+      padding: 0;
+    }
+    header img {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      object-fit: contain;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1 class="site-title">はじめサーバー</h1>
-            <div class="search-bar">
-                <form action="#" method="get">
-                    <input type="search" placeholder="検索...">
-                    <button type="submit">検索</button>
-                </form>
-            </div>
-        </div>
-    </header>
-    <main>
-        </main>
+  <header>
+    <img src="/file/hajimeserver.png" alt="Logo">
+  </header>
 </body>
 </html>
