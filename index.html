@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Header Test</title>
+  <title>はじめサーバー</title>
   
   <!-- favicon / iOS / PWA icons -->
   <link rel="icon" type="image/jpeg" href="/file/logo.jpeg">
@@ -16,35 +16,32 @@
     }
     header {
       display: flex;
-      flex-direction: column;
-      height: 120px; /* 上下60pxずつ */
-      padding: 0;
-    }
-    .header-top {
-      display: flex;
       align-items: center;
-      height: 50%;
-      background: linear-gradient(to right, #6633CC, #C299FF);
+      justify-content: flex-start;
+      height: 60px;
+      background: #ffffff;
       padding: 0;
+      border-bottom: 8px solid transparent;
+      border-image: linear-gradient(to right, #6633CC, #C299FF) 1;
     }
-    .header-top img {
+    header img {
       height: 100%;
       margin: 0;
       padding: 0;
       object-fit: contain;
     }
-    .header-bottom {
-      height: 50%;
-      background: #ffffff;
+    .site-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-left: 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <img src="/file/hajimeserver.png" alt="Logo">
-    </div>
-    <div class="header-bottom"></div>
+    <img src="/file/hajimeserver.png" alt="Logo">
+    <div class="site-name">はじめサーバー</div>
   </header>
 </body>
 </html>
