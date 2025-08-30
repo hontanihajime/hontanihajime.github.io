@@ -91,27 +91,28 @@
       text-decoration: underline;
     }
 
-    /* コンテンツレイアウト */
-    .main-content {
-      display: flex;
+    /* メインレイアウト */
+    .main {
       flex: 1;
+      display: flex;
     }
     .menu {
-      background: #f3e8ff; /* 薄紫色 */
-      padding: 0;
-      margin: 0;
+      background: #f3e6ff; /* 薄紫色 */
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      padding: 0;
+      width: 150px; /* メニュー部分の幅を1.5倍に拡大 */
     }
     .menu img {
-      width: 100px;
+      width: 100%;
+      height: auto;
       display: block;
     }
-    .content-area {
+    .content {
       flex: 1;
       background: #ffffff;
-      padding: 20px;
+      padding: 10px;
     }
   </style>
 </head>
@@ -143,7 +144,7 @@
     </div>
   </header>
 
-  <div class="main-content">
+  <div class="main">
     <div class="menu">
       <img src="/file/top.png" alt="Top">
       <img src="/file/calendar.png" alt="Calendar">
@@ -158,8 +159,8 @@
       <img src="/file/people.png" alt="People">
       <img src="/file/sonota.png" alt="Sonota">
     </div>
-    <div class="content-area">
-      <!-- ここにコンテンツを表示 -->
+    <div class="content">
+      <!-- コンテンツ表示部分 -->
     </div>
   </div>
 
