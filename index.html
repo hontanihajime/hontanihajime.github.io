@@ -98,6 +98,8 @@
           ログアウト
         </a>
       </div>
+      <button class="action-btn" onclick="recordWake()">起床</button>
+      <button class="action-btn" onclick="recordSleep()">就寝</button>
     </div>
     <div class="login-link">
       <a href="https://github.com/hontanihajime/hontanihajime.github.io" target="_blank" rel="noopener noreferrer">
@@ -105,5 +107,17 @@
       </a>
     </div>
   </header>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
+
+    function recordWake() {
+      fetch(GAS_URL + "?action=wake");
+    }
+
+    function recordSleep() {
+      fetch(GAS_URL + "?action=sleep");
+    }
+  </script>
 </body>
 </html>
