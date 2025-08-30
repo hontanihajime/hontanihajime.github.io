@@ -27,13 +27,14 @@
     .left-section {
       display: flex;
       align-items: center;
+      height: 100%;
     }
-    header img.logo {
-      max-height: 100%;
+    .left-section img.logo {
+      max-height: 100%; /* ヘッダーの高さに収まるようにする */
+      height: auto;
       width: auto;
-      margin: 0;
-      padding: 0;
       object-fit: contain;
+      display: block;
     }
     /* Google ボタン */
     .google-btn {
