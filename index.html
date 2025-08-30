@@ -16,22 +16,35 @@
     }
     header {
       display: flex;
+      flex-direction: column;
+      height: 120px; /* 全体高さ（上60px＋下60px） */
+      padding: 0;
+    }
+    .header-top {
+      display: flex;
       align-items: center;
-      height: 60px; /* 必要なら調整 */
+      height: 50%;
       background: linear-gradient(to right, #6633CC, #C299FF);
       padding: 0;
     }
-    header img {
+    .header-top img {
       height: 100%;
       margin: 0;
       padding: 0;
       object-fit: contain;
     }
+    .header-bottom {
+      height: 50%;
+      background: #ffffff;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="/file/hajimeserver.png" alt="Logo">
+    <div class="header-top">
+      <img src="/file/hajimeserver.png" alt="Logo">
+    </div>
+    <div class="header-bottom"></div>
   </header>
 </body>
 </html>
