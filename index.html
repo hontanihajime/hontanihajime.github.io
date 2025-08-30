@@ -17,7 +17,7 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between; /* 左にロゴ＆Googleボタン、右にログインリンク */
+      justify-content: space-between;
       height: 60px;
       background: #ffffff;
       padding: 0 10px;
@@ -30,14 +30,14 @@
       height: 100%;
     }
     .left-section img.logo {
-      max-height: 100%; /* ヘッダーの高さに収まるようにする */
+      max-height: 100%;
       height: auto;
       width: auto;
       object-fit: contain;
       display: block;
     }
-    /* Google ボタン */
-    .google-btn {
+    /* 共通ボタンデザイン */
+    .action-btn {
       display: flex;
       align-items: center;
       background: #fff;
@@ -53,15 +53,15 @@
       cursor: pointer;
       transition: box-shadow 0.2s;
     }
-    .google-btn:hover {
+    .action-btn:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .google-btn img {
+    .action-btn img {
       height: 20px;
       width: 20px;
       margin-right: 8px;
     }
-    .google-btn a {
+    .action-btn a {
       display: flex;
       align-items: center;
       text-decoration: none;
@@ -71,7 +71,7 @@
     .login-link {
       font-size: 0.8rem;
       position: relative;
-      top: 10px; /* 少し下げて調整 */
+      top: 10px;
     }
     .login-link a {
       color: #333;
@@ -86,10 +86,16 @@
   <header>
     <div class="left-section">
       <img src="/file/hajimeserver.png" alt="Logo" class="logo">
-      <div class="google-btn">
+      <div class="action-btn">
         <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
           <img src="/file/google.png" alt="Google Icon">
           ログイン
+        </a>
+      </div>
+      <div class="action-btn">
+        <a href="https://accounts.google.com/logout" target="_blank" rel="noopener noreferrer">
+          <img src="/file/logout.png" alt="Logout Icon">
+          ログアウト
         </a>
       </div>
     </div>
