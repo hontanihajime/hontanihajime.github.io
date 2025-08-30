@@ -68,7 +68,7 @@
       color: inherit;
     }
 
-    /* 起床・就寝ボタン専用 */
+    /* 起床・就寝・登校・下校ボタン専用 */
     .gradient-btn {
       background: linear-gradient(to right, #6633CC, #C299FF);
       color: #fff;
@@ -86,6 +86,20 @@
     }
     .login-link a:hover {
       text-decoration: underline;
+    }
+
+    /* コンテンツ部分 */
+    .content {
+      padding: 0;
+      margin: 0;
+    }
+    .content img.top-img {
+      display: block;
+      margin: 0;
+      padding: 0;
+      width: auto;
+      max-width: 150px; /* hajimeserverより短めに設定 */
+      height: auto;
     }
   </style>
 </head>
@@ -107,6 +121,8 @@
       </div>
       <button class="action-btn gradient-btn" onclick="recordWake()">起床</button>
       <button class="action-btn gradient-btn" onclick="recordSleep()">就寝</button>
+      <button class="action-btn gradient-btn" onclick="recordGoSchool()">登校</button>
+      <button class="action-btn gradient-btn" onclick="recordLeaveSchool()">下校</button>
     </div>
     <div class="login-link">
       <a href="https://github.com/hontanihajime/hontanihajime.github.io" target="_blank" rel="noopener noreferrer">
@@ -114,6 +130,10 @@
       </a>
     </div>
   </header>
+
+  <div class="content">
+    <img src="/file/top.png" alt="Top Image" class="top-img">
+  </div>
 
   <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
@@ -124,6 +144,14 @@
 
     function recordSleep() {
       fetch(GAS_URL + "?action=sleep");
+    }
+
+    function recordGoSchool() {
+      fetch(GAS_URL + "?action=goSchool");
+    }
+
+    function recordLeaveSchool() {
+      fetch(GAS_URL + "?action=leaveSchool");
     }
   </script>
 </body>
