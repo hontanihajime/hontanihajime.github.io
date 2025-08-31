@@ -30,29 +30,31 @@
     .left-section {
       display: flex;
       align-items: center;
+      height: 100%;
     }
     .logo {
       height: 100%;
+      max-height: 60px; /* ヘッダーの高さに収める */
+      width: auto;
       object-fit: contain;
     }
-    .google-btn, .logout-btn, .action-btn, .menu button {
+    .google-btn, .logout-btn, .action-btn {
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-radius: 20px;
+      background: #fff;
+      border-radius: 8px; /* 丸すぎないように調整 */
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      padding: 8px 12px;
-      margin: 6px 12px;
+      padding: 5px 12px;
+      margin-left: 12px;
       font-size: 14px;
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
-      cursor: pointer;
-      border: 1px solid #ddd;
-      transition: box-shadow 0.2s;
-      background: #fff;
       color: #444;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
     }
-    .google-btn:hover, .logout-btn:hover, .action-btn:hover, .menu button:hover {
+    .google-btn:hover, .logout-btn:hover, .action-btn:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
     .google-btn img, .logout-btn img {
@@ -87,8 +89,21 @@
       background-color: #f3eaff;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      padding-top: 10px;
+    }
+    .menu button {
+      padding: 12px;
+      border: none;
+      background: #fff;
+      border-radius: 8px;
+      margin: 4px;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+    }
+    .menu button:hover {
+      background-color: #f0f0f0;
     }
     .content {
       flex: 1;
@@ -157,7 +172,7 @@
       <button>その他</button>
     </div>
     <div class="content">
-      <img src="/file/top.png" alt="Top" style="width:100px; display:block;">
+      <!-- コンテンツ表示領域 -->
     </div>
   </div>
 </body>
