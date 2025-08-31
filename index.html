@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>はじめサーバー</title>
-  
+
   <!-- favicon / iOS / PWA icons -->
   <link rel="icon" type="image/jpeg" href="/file/logo.jpeg">
   <link rel="apple-touch-icon" href="/file/logo.jpeg">
@@ -13,6 +13,9 @@
   <style>
     body {
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
     header {
       display: flex;
@@ -27,54 +30,41 @@
     .left-section {
       display: flex;
       align-items: center;
+    }
+    .logo {
       height: 100%;
-    }
-    .left-section img.logo {
-      max-height: 100%;
-      height: auto;
-      width: auto;
       object-fit: contain;
-      display: block;
     }
-    /* 共通ボタンデザイン */
-    .action-btn {
+    .google-btn, .logout-btn, .action-btn, .menu button {
       display: flex;
       align-items: center;
-      background: #fff;
-      border-radius: 6px;
+      justify-content: center;
+      border-radius: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      padding: 5px 12px;
-      margin-left: 12px;
+      padding: 8px 12px;
+      margin: 6px 12px;
       font-size: 14px;
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
-      color: #444;
-      border: 1px solid #ddd;
       cursor: pointer;
+      border: 1px solid #ddd;
       transition: box-shadow 0.2s;
+      background: #fff;
+      color: #444;
     }
-    .action-btn:hover {
+    .google-btn:hover, .logout-btn:hover, .action-btn:hover, .menu button:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
-    .action-btn img {
+    .google-btn img, .logout-btn img {
       height: 20px;
       width: 20px;
       margin-right: 8px;
     }
-    .action-btn a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* 起床・就寝・登校・下校ボタン専用 */
     .gradient-btn {
       background: linear-gradient(to right, #6633CC, #C299FF);
       color: #fff;
       border: none;
     }
-
     .login-link {
       font-size: 0.8rem;
       position: relative;
@@ -88,52 +78,58 @@
       text-decoration: underline;
     }
 
-    /* コンテンツ部分 */
-    .content {
-      padding: 0;
-      margin: 0;
+    .container {
+      display: flex;
+      flex: 1;
     }
-    .content img.top-img {
-      display: block;
-      margin: 0;
-      padding: 0;
-      width: auto;
-      max-width: 150px; /* hajimeserverより短めに設定 */
-      height: auto;
-    }
-    .content .icon-grid {
+    .menu {
+      width: 180px; /* 1.5倍に拡張 */
+      background-color: #f3eaff;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin: 0;
-      padding: 0;
+      align-items: stretch;
+      padding-top: 10px;
     }
-    .content .icon-grid img {
-      display: block;
-      margin: 0;
-      padding: 0;
-      width: auto;
-      max-width: 150px;
-      height: auto;
+    .content {
+      flex: 1;
+      background-color: #fff;
+      padding: 20px;
     }
   </style>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
+
+    function recordWake() {
+      fetch(GAS_URL + "?action=wake");
+    }
+    function recordSleep() {
+      fetch(GAS_URL + "?action=sleep");
+    }
+    function recordGoSchool() {
+      fetch(GAS_URL + "?action=goSchool");
+    }
+    function recordLeaveSchool() {
+      fetch(GAS_URL + "?action=leaveSchool");
+    }
+  </script>
 </head>
 <body>
   <header>
     <div class="left-section">
       <img src="/file/hajimeserver.png" alt="Logo" class="logo">
-      <div class="action-btn">
-        <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
+        <button class="google-btn">
           <img src="/file/google.png" alt="Google Icon">
           ログイン
-        </a>
-      </div>
-      <div class="action-btn">
-        <a href="https://accounts.google.com/logout" target="_blank" rel="noopener noreferrer">
+        </button>
+      </a>
+      <a href="https://accounts.google.com/logout" target="_blank" rel="noopener noreferrer">
+        <button class="logout-btn">
           <img src="/file/logout.png" alt="Logout Icon">
           ログアウト
-        </a>
-      </div>
+        </button>
+      </a>
       <button class="action-btn gradient-btn" onclick="recordWake()">起床</button>
       <button class="action-btn gradient-btn" onclick="recordSleep()">就寝</button>
       <button class="action-btn gradient-btn" onclick="recordGoSchool()">登校</button>
@@ -146,41 +142,23 @@
     </div>
   </header>
 
-  <div class="content">
-    <img src="/file/top.png" alt="Top Image" class="top-img">
-    <div class="icon-grid">
-      <img src="/file/calendar.png" alt="calendar">
-      <img src="/file/dentaku.png" alt="dentaku">
-      <img src="/file/app.png" alt="app">
-      <img src="/file/news.png" alt="news">
-      <img src="/file/timer.png" alt="timer">
-      <img src="/file/drive.png" alt="drive">
-      <img src="/file/seiseki.png" alt="seiseki">
-      <img src="/file/sutasapu.png" alt="sutasapu">
-      <img src="/file/mail.png" alt="mail">
-      <img src="/file/people.png" alt="people">
-      <img src="/file/sonota.png" alt="sonota">
+  <div class="container">
+    <div class="menu">
+      <button>トップ</button>
+      <button>カレンダー</button>
+      <button>電卓</button>
+      <button>アプリ</button>
+      <button>ニュース</button>
+      <button>タイマー</button>
+      <button>ドライブ</button>
+      <button>成績</button>
+      <button>スタサプ</button>
+      <button>人間関係</button>
+      <button>その他</button>
+    </div>
+    <div class="content">
+      <img src="/file/top.png" alt="Top" style="width:100px; display:block;">
     </div>
   </div>
-
-  <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
-
-    function recordWake() {
-      fetch(GAS_URL + "?action=wake");
-    }
-
-    function recordSleep() {
-      fetch(GAS_URL + "?action=sleep");
-    }
-
-    function recordGoSchool() {
-      fetch(GAS_URL + "?action=goSchool");
-    }
-
-    function recordLeaveSchool() {
-      fetch(GAS_URL + "?action=leaveSchool");
-    }
-  </script>
 </body>
 </html>
