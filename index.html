@@ -34,7 +34,7 @@
     }
     .logo {
       height: 100%;
-      max-height: 60px; /* ヘッダーの高さに収める */
+      max-height: 60px;
       width: auto;
       object-fit: contain;
     }
@@ -42,7 +42,7 @@
       display: flex;
       align-items: center;
       background: #fff;
-      border-radius: 8px; /* 角を小さめに */
+      border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       padding: 5px 12px;
       margin-left: 12px;
@@ -90,7 +90,7 @@
       flex: 1;
     }
     .menu {
-      width: 180px; /* 1.5倍に拡張 */
+      width: 180px;
       background-color: #f3eaff;
       display: flex;
       flex-direction: column;
@@ -114,23 +114,33 @@
       flex: 1;
       background-color: #fff;
       padding: 20px;
+      overflow-y: auto;
     }
   </style>
 
   <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
 
-    function recordWake() {
-      fetch(GAS_URL + "?action=wake");
-    }
-    function recordSleep() {
-      fetch(GAS_URL + "?action=sleep");
-    }
-    function recordGoSchool() {
-      fetch(GAS_URL + "?action=goSchool");
-    }
-    function recordLeaveSchool() {
-      fetch(GAS_URL + "?action=leaveSchool");
+    function recordWake() { fetch(GAS_URL + "?action=wake"); }
+    function recordSleep() { fetch(GAS_URL + "?action=sleep"); }
+    function recordGoSchool() { fetch(GAS_URL + "?action=goSchool"); }
+    function recordLeaveSchool() { fetch(GAS_URL + "?action=leaveSchool"); }
+
+    // コンテンツを読み込む関数
+    function loadContent(url) {
+      const content = document.querySelector('.content');
+      content.innerHTML = "読み込み中...";
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("読み込み失敗");
+          return res.text();
+        })
+        .then(html => {
+          content.innerHTML = html;
+        })
+        .catch(err => {
+          content.innerHTML = "エラーが発生しました: " + err.message;
+        });
     }
   </script>
 </head>
@@ -164,20 +174,21 @@
 
   <div class="container">
     <div class="menu">
-      <button>トップ</button>
-      <button>カレンダー</button>
-      <button>電卓</button>
-      <button>アプリ</button>
-      <button>ニュース</button>
-      <button>タイマー</button>
-      <button>ドライブ</button>
-      <button>成績</button>
-      <button>スタサプ</button>
-      <button>人間関係</button>
-      <button>その他</button>
+      <button onclick="loadContent('/index.html')">トップ</button>
+      <button onclick="loadContent('/calendar/')">カレンダー</button>
+      <button onclick="loadContent('/calc.html')">電卓</button>
+      <button onclick="loadContent('/apps.html')">アプリ</button>
+      <button onclick="loadContent('/news.html')">ニュース</button>
+      <button onclick="loadContent('/timer.html')">タイマー</button>
+      <button onclick="loadContent('/drive.html')">ドライブ</button>
+      <button onclick="loadContent('/grades.html')">成績</button>
+      <button onclick="loadContent('/stasap.html')">スタサプ</button>
+      <button onclick="loadContent('/relations.html')">人間関係</button>
+      <button onclick="loadContent('/other.html')">その他</button>
     </div>
     <div class="content">
       <!-- コンテンツ表示領域 -->
+      ようこそ！メニューから選んでください。
     </div>
   </div>
 </body>
