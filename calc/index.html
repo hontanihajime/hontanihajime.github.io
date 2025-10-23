@@ -5,179 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>電卓</title>
     <style>
-        /* 電卓のスタイル */
+        /* 電卓のスタイル (画面いっぱい、配色調整) */
         .calculator {
-            max-width: 300px;
-            margin: 0 auto; /* 埋め込み先で中央に寄せたい場合 */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100vh; /* ビューポートの高さに合わせる (埋め込み先で調整が必要な場合はvhを削除) */
+            width: 100%;
+            margin: 0;
+            padding: 20px; /* ある程度の余白を確保 */
+            box-sizing: border-box;
+            background-color: #f3eaff; /* メニューの背景色に合わせた背景 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        .display-container {
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .display {
             width: 100%;
-            height: 50px;
-            margin-bottom: 10px;
-            padding: 0 10px;
+            height: 80px;
+            padding: 10px 20px;
             text-align: right;
-            font-size: 2em;
-            border: 2px solid #333;
-            border-radius: 5px;
+            font-size: 3em;
+            border: none;
+            background-color: #ffffff; /* 白い背景 */
+            color: #333;
             box-sizing: border-box;
-            background-color: #eee;
         }
         .buttons {
+            width: 90%;
+            max-width: 500px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
         .buttons button {
-            padding: 15px;
-            font-size: 1.2em;
+            padding: 20px;
+            font-size: 1.5em;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.2s;
+            color: #333;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s, box-shadow 0.2s;
         }
-        .buttons button:hover {
-            background-color: #ddd;
+        .buttons button:active {
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
+        /* デザイン合わせたボタン色 */
         .buttons button.operator {
-            background-color: #ff9500;
+            /* ヘッダーグラデーションの明るい色 */
+            background-color: #C299FF; 
             color: white;
+            font-weight: bold;
         }
         .buttons button.operator:hover {
-            background-color: #e08500;
-        }
-        .buttons button.clear {
-            background-color: #ff3b30;
-            color: white;
-        }
-        .buttons button.clear:hover {
-            background-color: #e0352c;
+            background-color: #af85e0;
         }
         .buttons button.equals {
-            background-color: #4cd964;
+            /* ヘッダーグラデーションの濃い色 */
+            background-color: #6633CC; 
             color: white;
-            grid-column: span 2; /* = ボタンを2マス幅にする */
+            font-weight: bold;
+            grid-column: span 2;
         }
         .buttons button.equals:hover {
-            background-color: #40c055;
+            background-color: #582aae;
+        }
+        .buttons button.clear {
+            background-color: #ddd;
+        }
+        .buttons button.clear:hover {
+            background-color: #ccc;
         }
     </style>
 </head>
 <body>
 
     <div class="calculator">
-        <input type="text" id="display" class="display" value="0" disabled>
+        <div class="display-container">
+            <input type="text" id="display" class="display" value="0" disabled>
+        </div>
+        
         <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendValue('/')">/</button>
-            <button class="operator" onclick="appendValue('*')">×</button>
+            <button class="clear" onclick="clearAll()">AC</button>
+            <button class="clear" onclick="deleteLast()">DEL</button>
+            <button class="operator" onclick="setOperator('/')">/</button>
+            <button class="operator" onclick="setOperator('*')">×</button>
+            
             <button onclick="appendValue('7')">7</button>
             <button onclick="appendValue('8')">8</button>
             <button onclick="appendValue('9')">9</button>
-            <button class="operator" onclick="appendValue('-')">-</button>
+            <button class="operator" onclick="setOperator('-')">-</button>
+            
             <button onclick="appendValue('4')">4</button>
             <button onclick="appendValue('5')">5</button>
             <button onclick="appendValue('6')">6</button>
-            <button class="operator" onclick="appendValue('+')">+</button>
+            <button class="operator" onclick="setOperator('+')">+</button>
+            
             <button onclick="appendValue('1')">1</button>
             <button onclick="appendValue('2')">2</button>
             <button onclick="appendValue('3')">3</button>
+            
             <button onclick="appendValue('0')">0</button>
             <button onclick="appendValue('.')">.</button>
-            <button class="equals" onclick="calculateResult()">=</button>
+            <button class="equals" onclick="calculate()">=</button>
         </div>
     </div>
 
     <script>
         const display = document.getElementById('display');
-        let currentInput = '0';
-        let operator = null;
-        let prevValue = null;
-        let waitingForSecondOperand = false;
+        let currentExpression = '0'; // 現在の数式全体を保持
 
         function updateDisplay() {
-            display.value = currentInput;
+            display.value = currentExpression;
         }
 
+        // 数値・小数点を追加
         function appendValue(value) {
-            if (waitingForSecondOperand) {
-                currentInput = value;
-                waitingForSecondOperand = false;
+            if (currentExpression === '0' && value !== '.') {
+                currentExpression = value;
+            } else if (isLastCharOperator()) {
+                currentExpression += value;
+            } else if (value === '.') {
+                // 現在の数値に既に小数点があるかチェック
+                const parts = currentExpression.split(/[\+\-\*\/]/);
+                const currentNumber = parts[parts.length - 1];
+                if (!currentNumber.includes('.')) {
+                    currentExpression += value;
+                }
             } else {
-                if (currentInput === '0' && value !== '.') {
-                    currentInput = value;
-                } else if (value === '.' && currentInput.includes('.')) {
-                    return; // 既に小数点がある場合は追加しない
+                currentExpression += value;
+            }
+            updateDisplay();
+        }
+
+        // 最後の文字が演算子かどうかを判定
+        function isLastCharOperator() {
+            const lastChar = currentExpression.slice(-1);
+            return ['+', '-', '*', '/'].includes(lastChar);
+        }
+
+        // 演算子を設定
+        function setOperator(op) {
+            if (isLastCharOperator()) {
+                // 最後の演算子を置き換える (例: 5++ -> 5+)
+                currentExpression = currentExpression.slice(0, -1) + op;
+            } else if (currentExpression !== '0' && currentExpression !== '') {
+                // 演算子を追加
+                currentExpression += op;
+            }
+            updateDisplay();
+        }
+
+        // すべてクリア
+        function clearAll() {
+            currentExpression = '0';
+            updateDisplay();
+        }
+
+        // 一文字削除
+        function deleteLast() {
+            if (currentExpression.length > 1) {
+                currentExpression = currentExpression.slice(0, -1);
+            } else {
+                currentExpression = '0';
+            }
+            updateDisplay();
+        }
+
+        // 計算を実行
+        function calculate() {
+            try {
+                // 最後に演算子がある場合は削除してから計算
+                let expressionToEvaluate = currentExpression;
+                while (isLastCharOperator()) {
+                    expressionToEvaluate = expressionToEvaluate.slice(0, -1);
+                }
+                
+                // JavaScriptのeval関数は使わず、より安全なFunctionコンストラクタを使用
+                // evalを使用する場合は、セキュリティリスクに注意してください
+                const result = new Function('return ' + expressionToEvaluate)();
+                
+                // 結果が無限大などになるのを防ぐ
+                if (isFinite(result)) {
+                    currentExpression = String(result);
                 } else {
-                    currentInput += value;
+                    currentExpression = 'Error';
                 }
+            } catch (e) {
+                currentExpression = 'Error';
             }
             updateDisplay();
         }
-
-        function clearDisplay() {
-            currentInput = '0';
-            operator = null;
-            prevValue = null;
-            waitingForSecondOperand = false;
-            updateDisplay();
-        }
-
-        function calculateResult() {
-            if (!operator || waitingForSecondOperand) return;
-
-            const secondOperand = parseFloat(currentInput);
-            const firstOperand = parseFloat(prevValue);
-
-            if (isNaN(secondOperand) || isNaN(firstOperand)) return;
-
-            let result = 0;
-            switch (operator) {
-                case '+':
-                    result = firstOperand + secondOperand;
-                    break;
-                case '-':
-                    result = firstOperand - secondOperand;
-                    break;
-                case '*':
-                    result = firstOperand * secondOperand;
-                    break;
-                case '/':
-                    result = firstOperand / secondOperand;
-                    break;
-                default:
-                    return;
-            }
-
-            currentInput = String(result);
-            operator = null;
-            prevValue = null;
-            waitingForSecondOperand = false;
-            updateDisplay();
-        }
-
-        // オペレーター処理（簡易版）
-        document.querySelectorAll('.operator').forEach(button => {
-            button.onclick = function() {
-                const nextOperator = this.textContent;
-
-                if (operator && !waitingForSecondOperand) {
-                    calculateResult(); // 続けて演算子が押されたら即座に計算
-                }
-                
-                prevValue = currentInput;
-                operator = nextOperator === '×' ? '*' : nextOperator; // 表示と内部処理を合わせる
-                waitingForSecondOperand = true;
-                
-                // オペレーターを押した後の表示は変更しない（直前の値を保持）
-            };
-        });
 
         // 初期表示
         updateDisplay();
