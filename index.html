@@ -147,6 +147,11 @@
           content.innerHTML = '<div class="content-initial-message">エラーが発生しました: ' + err.message + '</div>';
         });
     }
+    
+    // 電卓用の新しい関数
+    function openCalculator() {
+        window.open('https://calculator.apps.chrome/', '_blank');
+    }
   </script>
 </head>
 <body>
@@ -181,7 +186,7 @@
     <div class="menu">
       <button onclick="loadContent('/top')">トップ</button>
       <button onclick="loadContent('/calendar/')">カレンダー</button>
-      <button onclick="loadContent('/calc')">電卓</button>
+      <button onclick="openCalculator()">電卓</button>
       <button onclick="loadContent('/apps')">アプリ</button>
       <button onclick="loadContent('/news')">ニュース</button>
       <button onclick="loadContent('/timer')">タイマー</button>
