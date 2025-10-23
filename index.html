@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>はじめサーバー</title>
 
-  <!-- favicon / iOS / PWA icons -->
   <link rel="icon" type="image/jpeg" href="/file/logo.jpeg">
   <link rel="apple-touch-icon" href="/file/logo.jpeg">
   <link rel="shortcut icon" type="image/jpeg" href="/file/logo.jpeg">
@@ -113,8 +112,13 @@
     .content {
       flex: 1;
       background-color: #fff;
-      padding: 20px;
+      /* ここを修正: paddingを0に変更 */
+      padding: 0;
       overflow-y: auto;
+    }
+    /* 追加: 初期コンテンツの余白をなくすためのスタイル */
+    .content-initial-message {
+      padding: 20px; /* 初期メッセージにのみ余白を適用したい場合など */
     }
   </style>
 
@@ -129,7 +133,8 @@
     // コンテンツを読み込む関数
     function loadContent(url) {
       const content = document.querySelector('.content');
-      content.innerHTML = "読み込み中...";
+      // 読み込み中のメッセージには、一時的に余白を適用したい場合があります
+      content.innerHTML = '<div class="content-initial-message">読み込み中...</div>';
       fetch(url)
         .then(res => {
           if (!res.ok) throw new Error("読み込み失敗");
@@ -139,7 +144,7 @@
           content.innerHTML = html;
         })
         .catch(err => {
-          content.innerHTML = "エラーが発生しました: " + err.message;
+          content.innerHTML = '<div class="content-initial-message">エラーが発生しました: ' + err.message + '</div>';
         });
     }
   </script>
@@ -187,8 +192,7 @@
       <button onclick="loadContent('/other')">その他</button>
     </div>
     <div class="content">
-      <!-- コンテンツ表示領域 -->
-      ようこそ！メニューから選んでください。
+      <div class="content-initial-message">ようこそ！メニューから選んでください。</div>
     </div>
   </div>
 </body>
