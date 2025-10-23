@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>はじめサーバー</title>
 
-  <!-- favicon / iOS / PWA icons -->
   <link rel="icon" type="image/jpeg" href="/file/logo.jpeg">
   <link rel="apple-touch-icon" href="/file/logo.jpeg">
   <link rel="shortcut icon" type="image/jpeg" href="/file/logo.jpeg">
@@ -34,7 +33,7 @@
     }
     .logo {
       height: 100%;
-      max-height: 60px; /* ヘッダーの高さに収める */
+      max-height: 60px;
       width: auto;
       object-fit: contain;
     }
@@ -42,7 +41,7 @@
       display: flex;
       align-items: center;
       background: #fff;
-      border-radius: 8px; /* 角を小さめに */
+      border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       padding: 5px 12px;
       margin-left: 12px;
@@ -90,7 +89,7 @@
       flex: 1;
     }
     .menu {
-      width: 180px; /* 1.5倍に拡張 */
+      width: 180px;
       background-color: #f3eaff;
       display: flex;
       flex-direction: column;
@@ -113,24 +112,40 @@
     .content {
       flex: 1;
       background-color: #fff;
-      padding: 20px;
+      /* ここを修正: paddingを0に変更 */
+      padding: 0;
+      overflow-y: auto;
+    }
+    /* 追加: 初期コンテンツの余白をなくすためのスタイル */
+    .content-initial-message {
+      padding: 20px; /* 初期メッセージにのみ余白を適用したい場合など */
     }
   </style>
 
   <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
 
-    function recordWake() {
-      fetch(GAS_URL + "?action=wake");
-    }
-    function recordSleep() {
-      fetch(GAS_URL + "?action=sleep");
-    }
-    function recordGoSchool() {
-      fetch(GAS_URL + "?action=goSchool");
-    }
-    function recordLeaveSchool() {
-      fetch(GAS_URL + "?action=leaveSchool");
+    function recordWake() { fetch(GAS_URL + "?action=wake"); }
+    function recordSleep() { fetch(GAS_URL + "?action=sleep"); }
+    function recordGoSchool() { fetch(GAS_URL + "?action=goSchool"); }
+    function recordLeaveSchool() { fetch(GAS_URL + "?action=leaveSchool"); }
+
+    // コンテンツを読み込む関数
+    function loadContent(url) {
+      const content = document.querySelector('.content');
+      // 読み込み中のメッセージには、一時的に余白を適用したい場合があります
+      content.innerHTML = '<div class="content-initial-message">読み込み中...</div>';
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("読み込み失敗");
+          return res.text();
+        })
+        .then(html => {
+          content.innerHTML = html;
+        })
+        .catch(err => {
+          content.innerHTML = '<div class="content-initial-message">エラーが発生しました: ' + err.message + '</div>';
+        });
     }
   </script>
 </head>
@@ -164,20 +179,20 @@
 
   <div class="container">
     <div class="menu">
-      <button>トップ</button>
-      <button>カレンダー</button>
-      <button>電卓</button>
-      <button>アプリ</button>
-      <button>ニュース</button>
-      <button>タイマー</button>
-      <button>ドライブ</button>
-      <button>成績</button>
-      <button>スタサプ</button>
-      <button>人間関係</button>
-      <button>その他</button>
+      <button onclick="loadContent('/top')">トップ</button>
+      <button onclick="loadContent('/calendar/')">カレンダー</button>
+      <button onclick="loadContent('/calc')">電卓</button>
+      <button onclick="loadContent('/apps')">アプリ</button>
+      <button onclick="loadContent('/news')">ニュース</button>
+      <button onclick="loadContent('/timer')">タイマー</button>
+      <button onclick="loadContent('/drive')">ドライブ</button>
+      <button onclick="loadContent('/grades')">成績</button>
+      <button onclick="loadContent('/stasap')">スタサプ</button>
+      <button onclick="loadContent('/relations')">人間関係</button>
+      <button onclick="loadContent('/other')">その他</button>
     </div>
     <div class="content">
-      <!-- コンテンツ表示領域 -->
+      <div class="content-initial-message">ようこそ！メニューから選んでください。</div>
     </div>
   </div>
 </body>
