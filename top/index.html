@@ -1,1 +1,36 @@
-<!DOCTYPE html> <html lang="ja"> <head> <meta charset="UTF-8"> <title>トップ</title> <style> .top-section { display: flex; /* Flexboxで横並び */ width: 100%; } .top-section iframe { border: 1px solid #ccc; box-sizing: border-box; overflow: auto; /* コンテンツがはみ出たらスクロールバーを出す */ } /* 左側のiframe（/top/clock.html）の設定 */ .top-section iframe:nth-child(1) { width: 20%; /* 幅: 20% */ height: 240px; /* 高さ: 158pxに変更 */ } /* 右側のiframe（/top/weather.html）の設定 */ .top-section iframe:nth-child(2) { width: 80%; /* 幅: 80% */ height: 263px; /* 高さ: 263pxに変更 */ } </style> </head> <body> <div class="top-section"> <iframe src="/top/clock.html" title="時計ウィジェット"></iframe> <iframe src="/top/weather.html" title="天気ウィジェット"></iframe> </div> </body> </html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>トップ</title>
+  <style>
+    .top-section {
+      display: flex; /* Flexboxで横並び */
+      width: 100%;
+    }
+
+    .top-section iframe {
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      overflow: auto; /* コンテンツがはみ出たらスクロールバーを出す */
+      height: 263px; /* 両方とも高さ263pxに統一 */
+    }
+
+    /* 左側のiframe（/top/clock.html）の設定 */
+    .top-section iframe:nth-child(1) {
+      width: 20%; /* 幅: 20% */
+    }
+
+    /* 右側のiframe（/top/weather.html）の設定 */
+    .top-section iframe:nth-child(2) {
+      width: 80%; /* 幅: 80% */
+    }
+  </style>
+</head>
+<body>
+  <div class="top-section">
+    <iframe src="/top/clock.html" title="時計ウィジェット"></iframe>
+    <iframe src="/top/weather.html" title="天気ウィジェット"></iframe>
+  </div>
+</body>
+</html>
