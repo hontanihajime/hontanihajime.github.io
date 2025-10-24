@@ -2,29 +2,30 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>トップ</title>
+    <title>埋め込みレイアウト（20% & 80%）</title>
     <style>
         .top-section {
             display: flex; /* Flexboxで横並び */
             width: 100%;
         }
 
-        /* 左側のiframe（/top/clock.html）の幅を30%にする */
-        .top-section iframe:nth-child(1) {
-            width: 20%; 
-            height: 400px; 
+        /* 共通の高さ設定 */
+        /* 元の400pxの約1/3 (133.33pxを丸めて130px) に設定 */
+        .top-section iframe {
+            height: 200px; 
             border: 1px solid #ccc;
             box-sizing: border-box;
-            overflow: auto;
+            overflow: auto; /* コンテンツがはみ出たらスクロールバーを出す */
         }
 
-        /* 右側のiframe（/top/weather.html）の幅を70%にする */
+        /* 左側のiframe（/top/clock.html）の幅を20%にする */
+        .top-section iframe:nth-child(1) {
+            width: 20%; 
+        }
+
+        /* 右側のiframe（/top/weather.html）の幅を80%にする */
         .top-section iframe:nth-child(2) {
             width: 80%; 
-            height: 400px; 
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            overflow: auto;
         }
     </style>
 </head>
@@ -36,5 +37,5 @@
         <iframe src="/top/weather.html" title="天気ウィジェット"></iframe>
     </div>
 
-</body>
+    </body>
 </html>
