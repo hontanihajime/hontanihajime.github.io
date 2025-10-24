@@ -5,25 +5,26 @@
   <title>トップ</title>
   <style>
     .top-section {
-      display: flex; /* Flexboxで横並び */
+      display: flex; /* 横並びにする */
       width: 100%;
     }
 
     .top-section iframe {
       border: 1px solid #ccc;
       box-sizing: border-box;
-      overflow: auto; /* コンテンツがはみ出たらスクロールバーを出す */
-      height: 263px; /* 両方とも高さ263pxに統一 */
+      overflow: auto;
+      height: 263px; /* 高さ統一 */
     }
 
-    /* 左側のiframe（/top/clock.html）の設定 */
+    /* 左側のiframe（時計）を263px固定 */
     .top-section iframe:nth-child(1) {
-      width: 23%; /* 幅: 20% */
+      width: 263px;
+      flex-shrink: 0; /* 画面幅が狭くなっても縮まない */
     }
 
-    /* 右側のiframe（/top/weather.html）の設定 */
+    /* 右側のiframe（天気）は残りの幅を使用 */
     .top-section iframe:nth-child(2) {
-      width: 80%; /* 幅: 80% */
+      flex: 1;
     }
   </style>
 </head>
