@@ -8,7 +8,7 @@
 </head>
 <body>
 <center>
-<svg id="clock" width="250" height="250" viewBox="0 0 100 100">
+<svg id="clock" width="239" height="239" viewBox="0 0 100 100">
 <defs>
   <style>
     .clock-face { fill: #ffffff; stroke: #008cb4; stroke-width: 5; }
@@ -45,7 +45,7 @@
 <circle class="center-dot" cx="50" cy="50" r="5"/>
 </svg>
 <script>
-const s = {"faceColor":"#ffffff","borderColor":"#008cb4","borderWidth":"5","numberColor":"#000000","hourHandColor":"#000000","minuteHandColor":"#000000","secondHandColor":"#c2c2c2","size":"250","fontSize":7,"showTicks":true,"tickColor":"#000000","majorTickLength":4,"minorTickLength":2,"majorTickWidth":0.5,"smoothSecond":true,"logo":"👀","logoSize":"20","logoPosition":"40","font":"Arial","logoFont":"Arial","logoColor":"#000000","useRomanNumerals":false,"centerDotColor":"#ff3a2f","centerDotSize":"5","hourHandShape":"line","minuteHandShape":"line","secondHandShape":"line","hourHandLength":"28","hourHandWidth":"1.5","minuteHandLength":"33","minuteHandWidth":"1.2","secondHandLength":35,"secondHandWidth":"0.7","showNumbers":true,"showLogo":true,"numberPosition":36,"showDate":true,"showDay":true,"dateColor":"#000000","dayColor":"#000000","dateFontSize":7,"dayFontSize":5,"dateBackgroundColor":"#ffffff","dayBackgroundColor":"#ffffff","dateBackgroundWidth":30,"dayBackgroundWidth":30,"dateBackgroundHeight":14,"dayBackgroundHeight":14,"datePositionX":50,"datePositionY":65,"dayPositionX":50,"dayPositionY":75,"showDateBackground":true,"showDayBackground":true};
+const s = {"faceColor":"#ffffff","borderColor":"#008cb4","borderWidth":"5","numberColor":"#000000","hourHandColor":"#000000","minuteHandColor":"#000000","secondHandColor":"#c2c2c2","size":"239","fontSize":7,"showTicks":true,"tickColor":"#000000","majorTickLength":4,"minorTickLength":2,"majorTickWidth":0.5,"smoothSecond":true,"logo":"👀","logoSize":"20","logoPosition":"40","font":"Arial","logoFont":"Arial","logoColor":"#000000","useRomanNumerals":false,"centerDotColor":"#ff3a2f","centerDotSize":"5","hourHandShape":"line","minuteHandShape":"line","secondHandShape":"line","hourHandLength":"28","hourHandWidth":"1.5","minuteHandLength":"33","minuteHandWidth":"1.2","secondHandLength":35,"secondHandWidth":"0.7","showNumbers":true,"showLogo":true,"numberPosition":36,"showDate":true,"showDay":true,"dateColor":"#000000","dayColor":"#000000","dateFontSize":7,"dayFontSize":5,"dateBackgroundColor":"#ffffff","dayBackgroundColor":"#ffffff","dateBackgroundWidth":30,"dayBackgroundWidth":30,"dateBackgroundHeight":14,"dayBackgroundHeight":14,"datePositionX":50,"datePositionY":65,"dayPositionX":50,"dayPositionY":75,"showDateBackground":true,"showDayBackground":true};
 const romanNumerals = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function drawHand(type, angle, length, width, color, shape) {
