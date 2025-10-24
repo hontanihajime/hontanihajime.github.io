@@ -1,2 +1,34 @@
-<iframe src="/top/clock.html" id="topLeftFrame"></iframe>
-<iframe src="/top/weather.html" id="topRightFrame"></iframe>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>トップ</title>
+    <style>
+        /* CSSは<style>タグ内に記述します */
+        .top-section {
+            display: flex; /* Flexboxで横並びにする */
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-frame {
+            /* 各iframeのサイズ設定 */
+            width: 50%; /* 画面の横幅を半分ずつ */
+            height: 400px; /* ★固定の高さ（ここが自動調整できない部分） */
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* 枠線を含めて50%の幅にする */
+            overflow: auto; /* コンテンツがはみ出したらスクロールバーを出す */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-section">
+        <iframe src="/top/clock.html" class="content-frame" title="時計ウィジェット"></iframe>
+
+        <iframe src="/top/weather.html" class="content-frame" title="天気ウィジェット"></iframe>
+    </div>
+
+    </body>
+</html>
