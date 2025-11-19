@@ -112,28 +112,25 @@
     .content {
       flex: 1;
       background-color: #fff;
-      /* ここを修正: paddingを0に変更 */
       padding: 0;
       overflow-y: auto;
     }
-    /* 追加: 初期コンテンツの余白をなくすためのスタイル */
     .content-initial-message {
-      padding: 20px; /* 初期メッセージにのみ余白を適用したい場合など */
+      padding: 20px;
     }
   </style>
 
   <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbxI-ci46rBKMadArqrRs8If59dW7nTfHqtkzPPgPw02oErqVNVy3k1iEXw4geV84Pcxpw/exec";
+    /* ↓↓↓ ここを最新の URL に更新済み ↓↓↓ */
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbw_-V9SlwCDibw7KEwNOpcNgfxIr0yydQZHFofet31fNlenf6yf2EIlip9GMOUa_bEqmg/exec";
 
     function recordWake() { fetch(GAS_URL + "?action=wake"); }
     function recordSleep() { fetch(GAS_URL + "?action=sleep"); }
     function recordGoSchool() { fetch(GAS_URL + "?action=goSchool"); }
     function recordLeaveSchool() { fetch(GAS_URL + "?action=leaveSchool"); }
 
-    // コンテンツを読み込む関数
     function loadContent(url) {
       const content = document.querySelector('.content');
-      // 読み込み中のメッセージには、一時的に余白を適用したい場合があります
       content.innerHTML = '<div class="content-initial-message">読み込み中...</div>';
       fetch(url)
         .then(res => {
@@ -148,7 +145,6 @@
         });
     }
     
-    // 電卓用の新しい関数
     function openCalculator() {
         window.open('https://classroom.google.com', '_blank');
     }
@@ -160,14 +156,12 @@
       <img src="/file/hajimeserver.png" alt="Logo" class="logo">
       <a class="button-link" href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
         <button class="google-btn">
-          <img src="/file/google.png" alt="Google Icon">
-          ログイン
+          <img src="/file/google.png" alt="Google Icon"> ログイン
         </button>
       </a>
       <a class="button-link" href="https://accounts.google.com/logout" target="_blank" rel="noopener noreferrer">
         <button class="logout-btn">
-          <img src="/file/logout.png" alt="Logout Icon">
-          ログアウト
+          <img src="/file/logout.png" alt="Logout Icon"> ログアウト
         </button>
       </a>
       <button class="action-btn gradient-btn" onclick="recordWake()">起床</button>
@@ -175,6 +169,7 @@
       <button class="action-btn gradient-btn" onclick="recordGoSchool()">登校</button>
       <button class="action-btn gradient-btn" onclick="recordLeaveSchool()">下校</button>
     </div>
+
     <div class="login-link">
       <a href="https://github.com/hontanihajime/hontanihajime.github.io" target="_blank" rel="noopener noreferrer">
         管理ページへログイン
@@ -196,6 +191,7 @@
       <button onclick="loadContent('/relations')">人間関係</button>
       <button onclick="loadContent('/other')">その他</button>
     </div>
+
     <div class="content">
       <div class="content-initial-message">ようこそ！メニューから選んでください。</div>
     </div>
