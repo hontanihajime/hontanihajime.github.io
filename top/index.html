@@ -4,35 +4,62 @@
   <meta charset="UTF-8">
   <title>トップ</title>
   <style>
+    /* 全体の余白をリセット */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 上部の画像エリア */
+    .header-image {
+      width: 100%;
+      display: block; /* 下部の謎の隙間を消す */
+    }
+
+    .header-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* 比率を保ちつつエリアを埋める */
+    }
+
+    /* 時計と天気の並び */
     .top-section {
-      display: flex; /* 横並びにする */
+      display: flex;
       width: 100%;
     }
 
     .top-section iframe {
-      border: none; /* 枠線を消す */
-      background: transparent; /* 背景を透明にする */
+      border: none;
+      background: transparent;
       box-sizing: border-box;
       overflow: auto;
-      height: 263px; /* 高さ統一 */
+      height: 263px;
     }
 
-    /* 左側のiframe（時計）を263px固定 */
+    /* 左側のiframe（時計） */
     .top-section iframe:nth-child(1) {
       width: 263px;
-      flex-shrink: 0; /* 画面幅が狭くなっても縮まない */
+      flex-shrink: 0;
     }
 
-    /* 右側のiframe（天気）は残りの幅を使用 */
+    /* 右側のiframe（天気） */
     .top-section iframe:nth-child(2) {
       flex: 1;
     }
   </style>
 </head>
 <body>
+
+  <!-- 1. 最上部の画像 -->
+  <div class="header-image">
+    <img src="file/top.JPG" alt="トップ画像">
+  </div>
+
+  <!-- 2. 時計と天気 -->
   <div class="top-section">
     <iframe src="/top/clock.html" title="時計ウィジェット"></iframe>
     <iframe src="/top/weather.html" title="天気ウィジェット"></iframe>
   </div>
+
 </body>
 </html>
